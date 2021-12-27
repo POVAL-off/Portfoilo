@@ -1,0 +1,58 @@
+.sidebar {
+  background-color: #24273E;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 100px;
+  width: 7%;
+  min-width: 50px;
+  height: 100vh;
+
+  .logo {
+    padding: 20px 10px;
+    margin-top: 10px;
+  }
+
+  &-list {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  &-item {
+    margin: 7px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: .3s linear;
+
+    &-link {
+      transition: .3s linear;
+    }
+
+    .sidebar-item-text {
+      position: absolute;
+      bottom: 0;
+      font-size: 12px;
+      opacity: 0;
+      padding: 0;
+      margin-top: -10px;
+      font-weight: 600;
+      transition: .3s linear;
+
+      &.active {
+        position: static;
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.no-out svg {
+  width: 40px;
+  height: 40px;
+}

@@ -1,0 +1,15 @@
+.animate-typography-symbol {
+  transition: .1s ease-out 0s;
+  cursor: default;
+  &:hover {
+    color: #50A0FF;
+    transform: translate(-5px, -5px) rotate(-15deg);
+    transition-delay: 0s, 1s;
+  }
+}
+
+
+p::selection {
+  background-color: #191c38;
+  color: #8388B8;
+}

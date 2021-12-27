@@ -1,19 +1,15 @@
 import React from 'react';
 import {Box, CssBaseline} from "@mui/material";
-import Sidebar from "./components/Sidebar";
-import Skills from "./pages/Skills";
-import {Routes, Route} from "react-router-dom";
-import Home from "./pages/Home";
+import Sidebar from "./components/organisms/Sidebar";
+import AppRouter from "./components/AppRouter";
+import routes from "./settings/routes";
 
 function App() {
   return (
     <Box sx={{ display: 'flex' }} className="App">
         <CssBaseline />
         <Sidebar />
-        <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/skills" element={<Skills/>} />
-        </Routes>
+        <AppRouter routes={routes} />
     </Box>
   );
 }
