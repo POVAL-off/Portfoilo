@@ -4,14 +4,15 @@ const theme = createTheme({
     palette: {
         primary: {
             main: '#8388B8',
-            light: '8591FF',
+            light: '#8591FF'
         },
         background: {
             default: '#141629',
             paper: '#24273E'
         },
         text: {
-            primary: '#8388B8'
+            primary: '#8388B8',
+            disabled: '#FFF4',
         }
     },
     typography: {

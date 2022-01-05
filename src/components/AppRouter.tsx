@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import IRouter from "../interfaces/routes";
 import {Route, Routes} from "react-router-dom";
 
@@ -8,11 +8,13 @@ interface IAppRouter {
 
 const AppRouter: React.FC<IAppRouter> = (props) => {
     return (
-        <Routes>
-            {props.routes.map(route => (
-                <Route key={route.id} path={route.link} element={route.component} />
-            ))}
-        </Routes>
+        <Suspense fallback={<div>Загрузка...</div>}>
+            <Routes>
+                {props.routes.map(route => (
+                    <Route key={route.id} path={route.link} element={route.component}/>
+                ))}
+            </Routes>
+        </Suspense>
     );
 };
 

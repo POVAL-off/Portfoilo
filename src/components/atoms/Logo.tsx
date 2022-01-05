@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {Box} from "@mui/material";
-import Logo_V from "../../resourse/svg/Logo_V.svg";
-import Logo_P from "../../resourse/svg/Logo_P.svg";
+import Logo_V from "../../resourse/svg/logo/Logo_V.svg";
+import Logo_P from "../../resourse/svg/logo/Logo_P.svg";
 
 export enum ImageSize {
     Small = 25
@@ -30,7 +30,7 @@ export const Logo: React.FC<ILogoProps> = ({animation, imageSize}) => {
         if (animation === false) return;
 
         const intervalAnimateLogo = setInterval(() => {
-            setRotateV(prev => prev == 345 ? 360 : 345);
+            setRotateV(prev => prev === 345 ? 360 : 345);
         }, 1000);
 
         return () => {

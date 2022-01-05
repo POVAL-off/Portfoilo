@@ -15,7 +15,7 @@ const Sidebar: React.FC = () => {
             <Logo imageSize={ImageSize.Small}/>
             <Box className="sidebar-list">
                 {SidebarItems.map(item => (
-                    <SidebarItem item={item} active={isRouteActive(item.link)}/>
+                    <SidebarItem key={item.id} item={item} active={isRouteActive(item.link)}/>
                 ))}
             </Box>
         </Box>
