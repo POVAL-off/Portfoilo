@@ -9,8 +9,8 @@ const AnimateTypography: React.FC<IAnimateTypography> = ({children, text, ...pro
 
     return (
         <Typography className="animate-typography" display="flex" {...props}>
-            {(text || children || '').toString().split('').map(element => (
-                <p className='animate-typography-symbol' style={{
+            {(text || children || '').toString().split('').map((element, index) => (
+                <p className='animate-typography-symbol' key={index} style={{
                     margin: 0,
                     padding: .5,
                 }}>{element === ' ' ? ' ' : element}</p>

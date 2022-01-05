@@ -1,0 +1,75 @@
+.project-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid #FFFa;
+  border-radius: 20px;
+  padding: 10px;
+  margin: 10px;
+  height: 270px;
+
+  position: relative;
+
+  &::before,
+  &::after {
+    position: absolute;
+    content: '';
+    width: 101%;
+    height: 101%;
+    border-radius: 20px;
+    z-index: -1;
+  }
+
+  &::before {
+    transform: translate(-11px, -9px);
+    border: 2px solid #CF2323aa;
+  }
+
+  &::after {
+    transform: translate(-15px, -12px);
+    border: 2px solid #0D7CFF99;
+  }
+
+  &-content {
+    & img {
+      width: clamp(200px, 60%, 400px);
+      object-fit: cover;
+      border-radius: 20px;
+      margin-right: 5px;
+      max-height: 180px;
+
+      cursor: pointer;
+    }
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    & .stack {
+      display: flex;
+      align-items: center;
+      img {
+        height: 27px;
+        padding: 0 5px;
+      }
+    }
+  }
+
+  &-name {
+    cursor: pointer;
+    color: #eee;
+    opacity: .8;
+    &:hover {
+      text-decoration: underline;
+      opacity: 1;
+    }
+  }
+
+  &-description {
+    display: -webkit-box;
+    -webkit-line-clamp: 7; // количество строк
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}

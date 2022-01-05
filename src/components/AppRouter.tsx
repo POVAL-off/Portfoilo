@@ -1,6 +1,7 @@
 import React, {Suspense} from 'react';
 import IRouter from "../interfaces/routes";
 import {Route, Routes} from "react-router-dom";
+import Loading from "../pages/Loading";
 
 interface IAppRouter {
     routes: IRouter[]
@@ -8,7 +9,7 @@ interface IAppRouter {
 
 const AppRouter: React.FC<IAppRouter> = (props) => {
     return (
-        <Suspense fallback={<div>Загрузка...</div>}>
+        <Suspense fallback={<Loading />}>
             <Routes>
                 {props.routes.map(route => (
                     <Route key={route.id} path={route.link} element={route.component}/>

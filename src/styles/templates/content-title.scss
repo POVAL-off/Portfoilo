@@ -1,14 +1,22 @@
 .content-title {
-  width: 50%;
+  width: 60%;
   height: 100%;
   margin: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 
   & .title-container {
     display: flex;
     justify-content: center;
     margin-bottom: 80px;
+  }
+
+  & .content-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 }
