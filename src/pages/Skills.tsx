@@ -1,35 +1,29 @@
-import React from 'react';
+import React, {
+    useEffect, useState
+} from 'react';
 import {Box} from "@mui/material";
-import JSIcon from "../resourse/svg/skills/JS.svg";
-import TSIcon from "../resourse/svg/skills/TS.svg";
-import ReactIcon from "../resourse/svg/skills/React.svg";
-import MongoIcon from "../resourse/svg/skills/Mongo.svg";
 import {SkillItem} from "../components/molecules/SkillItem";
 import ContentTitle from "../components/templates/ContentTitle";
-
-export interface ISkill {
-    id: number | string;
-    name: string;
-    icon: string;
-    progress: number;
-}
-
-export const SkillsData: ISkill[] = [
-    {id: 1, name: 'JavaScript', icon: JSIcon, progress: 90},
-    {id: 2, name: 'TypeScript', icon: TSIcon, progress: 80},
-    {id: 3, name: 'React', icon: ReactIcon, progress: 70},
-    {id: 4, name: 'Mongo', icon: MongoIcon, progress: 50}
-]
+import {useQuery} from "@apollo/client";
+import Loading from "./Loading";
+import {GetSkillsDocument, ISkill} from "../generated/graphql";
 
 const Skills: React.FC = () => {
+    const {loading, data, error} = useQuery(GetSkillsDocument);
+    const [skills, setSkills] = useState<ISkill[] | null>(null);
+
+    useEffect(() => {
+        setSkills(data?.getSkills as ISkill[]);
+    }, [data]);
+
     return (
         <Box className="skills" width="100%">
-            <ContentTitle>
-                {SkillsData.map(item => (
-                    <SkillItem key={item.id} item={item}/>
+            <ContentTitle >
+                {loading && <Loading />}
+                {skills?.map(item => (
+                    <SkillItem key={item._id} item={item}/>
                 ))}
             </ContentTitle>
-
         </Box>
     );
 };

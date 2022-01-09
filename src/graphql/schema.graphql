@@ -1,0 +1,11 @@
+query GetSkills {
+    getSkills {
+        _id,
+        name,
+        shortName,
+        description,
+        progress,
+        status,
+        image
+    }
+}

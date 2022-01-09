@@ -6,14 +6,24 @@ import {ThemeProvider} from "@mui/material";
 import theme from "./settings/theme";
 import "./styles/index.scss"
 import {BrowserRouter} from "react-router-dom";
+import {ApolloClient, ApolloProvider, InMemoryCache} from "@apollo/client";
+import { createUploadLink } from "apollo-upload-client";
+
+const client = new ApolloClient({
+    uri: 'http://localhost:5000/graphql',
+    cache: new InMemoryCache(),
+    link: createUploadLink({ uri: 'http://localhost:5000/graphql' })
+})
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <ThemeProvider theme={theme}>
-                <App/>
-            </ThemeProvider>
-        </BrowserRouter>
+        <ApolloProvider client={client}>
+            <BrowserRouter>
+                <ThemeProvider theme={theme}>
+                    <App/>
+                </ThemeProvider>
+            </BrowserRouter>
+        </ApolloProvider>
     </React.StrictMode>,
     document.getElementById('root')
 );

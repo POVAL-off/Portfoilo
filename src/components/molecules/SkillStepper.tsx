@@ -7,7 +7,7 @@ interface ISkillsStepper {
     activeStep?: number
 }
 
-export const SkillsStepper: React.FC<ISkillsStepper> = ({ activeStep }) => {
+const SkillStepper: React.FC<ISkillsStepper> = ({ activeStep }) => {
     const NameSkills = ['Beginner', 'Junior', 'Middle', 'Senior', 'Expert'];
 
     return (
@@ -20,3 +20,5 @@ export const SkillsStepper: React.FC<ISkillsStepper> = ({ activeStep }) => {
         </Stepper>
     );
 };
+
+export default React.memo(SkillStepper);
