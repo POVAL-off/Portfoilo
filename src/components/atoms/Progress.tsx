@@ -1,6 +1,7 @@
+import React from "react";
 import {LinearProgress as MuiLinearProgress, linearProgressClasses, styled} from "@mui/material";
 
-export const LinearProgress = styled(MuiLinearProgress)(({theme}) => ({
+const LinearProgress = styled(MuiLinearProgress)(({theme}) => ({
     height: 16,
     borderRadius: 20,
     [`&.${linearProgressClasses.colorPrimary}`]: {
@@ -11,3 +12,5 @@ export const LinearProgress = styled(MuiLinearProgress)(({theme}) => ({
         backgroundColor: theme.palette.primary.main
     },
 }));
+
+export default React.memo(LinearProgress);

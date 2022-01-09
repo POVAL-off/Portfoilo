@@ -1,11 +1,10 @@
-import {IProject} from "../../pages/Projects";
 import {Box, Rating, Typography} from "@mui/material";
 import StarBorderRoundedIcon from "@mui/icons-material/StarBorderRounded";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import React from "react";
 
 interface IRate {
-    rate: IProject['rate']
+    rate: number
 }
 
 export function Rate({rate}: IRate) {
