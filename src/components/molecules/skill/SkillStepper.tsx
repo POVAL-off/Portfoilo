@@ -1,7 +1,7 @@
 import React from "react";
 import {Step, Stepper} from "@mui/material";
-import {StepLabel} from "../atoms/StepLabel";
-import {StepTrunc} from "../atoms/StepTrunc";
+import {StepLabel} from "../../atoms/StepLabel";
+import {StepTrunc} from "../../atoms/StepTrunc";
 
 interface ISkillsStepper {
     activeStep?: number

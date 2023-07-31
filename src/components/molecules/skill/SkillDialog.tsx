@@ -1,7 +1,7 @@
 import React from "react";
-import {ContentDialog} from "../templates/ContentDialog";
+import {ContentDialog} from "../../templates/ContentDialog";
 import {DialogContentText} from "@mui/material";
-import {ISkill} from "../../generated/graphql";
+import {ISkill} from "../../../generated/graphql";
 
 interface ISkillDialog {
     open: boolean;

@@ -1,11 +1,11 @@
 import React from "react";
 import {Box, Tooltip} from "@mui/material";
 import SkillStepper from "./SkillStepper";
-import LinearProgress from "../atoms/Progress";
+import LinearProgress from "../../atoms/Progress";
 import {SkillDialog} from "./SkillDialog";
-import {ISkill} from "../../generated/graphql";
+import {ISkill} from "../../../generated/graphql";
 
-interface ISkillItemProps {
+export interface ISkillItemProps {
     item: ISkill
 }
 

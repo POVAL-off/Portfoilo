@@ -1,0 +1,12 @@
+.edit-panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #FFF1;
+  border-radius: 20px;
+  backdrop-filter: blur(10);
+
+  &-wrapper {
+    position: relative;
+  }
+}
