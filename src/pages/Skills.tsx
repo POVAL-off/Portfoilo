@@ -9,6 +9,8 @@ import Loading from "./Loading";
 import {GetSkillsDocument, ISkill} from "../generated/graphql";
 import ContentStepper from "../components/templates/ContentStepper";
 import SkillItemEditor from "../components/molecules/skill/SkillItemEditor";
+import useRole from '../hooks/useRole';
+import SkillItemSkeleton from "../components/molecules/skill/SkillItemSkeleton";
 
 const ITEMS_PER_PAGE = 5;
 
@@ -18,6 +20,7 @@ const showElementsPerPage = <T extends unknown>(items: T[], page: number): T[] =
 
 const Skills: React.FC = () => {
     const {loading, data, error} = useQuery(GetSkillsDocument);
+    const { isEditor } = useRole();
     const [skills, setSkills] = useState<ISkill[] | null>(null);
     const [page, setPage] = useState(0);
 
@@ -30,14 +33,16 @@ const Skills: React.FC = () => {
     return (
         <Box className="skills" width="100%">
             <ContentTitle >
-                {loading && <Loading />}
                 <ContentStepper
                     page={page}
                     onChange={handleChangePage}
                     pageCount={Math.ceil((skills?.length || 0) / ITEMS_PER_PAGE)}
                 >
+                    {(loading || !skills) && Array.from({ length: 5 }).map(() => <SkillItemSkeleton />)}
                     {skills && showElementsPerPage(skills, page)?.map(item => (
-                        <SkillItemEditor key={item._id} item={item}/>
+                        isEditor
+                         ? <SkillItemEditor key={item._id} item={item} />
+                         : <SkillItem key={item._id} item={item} />
                     ))}
                 </ContentStepper>
             </ContentTitle>

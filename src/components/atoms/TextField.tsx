@@ -2,7 +2,7 @@ import {StandardTextFieldProps, TextField as MuiTextField} from "@mui/material";
 import React from "react";
 import {useFormik} from "formik"
 
-type FormikValues = Record<string, string | number>
+type FormikValues = Record<string, unknown>
 
 type ReturnUseFormik<T extends FormikValues> = ReturnType<typeof useFormik<T>>;
 

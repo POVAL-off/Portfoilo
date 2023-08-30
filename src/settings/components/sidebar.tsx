@@ -11,6 +11,8 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import InfoIcon from "@mui/icons-material/Info";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import LoginIcon from '@mui/icons-material/Login';
+import LoginOutlinedIcon from '@mui/icons-material/LoginOutlined';
 import React from "react";
 
 export const SidebarItems: ISidebarItem[] = [
@@ -19,5 +21,6 @@ export const SidebarItems: ISidebarItem[] = [
     {id: 3, name: 'Проекты', link: '/projects', icon: <WorkIcon/>, borderIcon: <WorkOutlineOutlinedIcon/>},
     {id: 4, name: 'Связатся', link: '/about-me', icon: <ContactMailIcon/>, borderIcon: <ContactMailOutlinedIcon/>},
     {id: 5, name: 'Настройки', link: '/settings', icon: <SettingsIcon/>, borderIcon: <SettingsOutlinedIcon/>},
-    {id: 6, name: 'Информация', link: '/info', icon: <InfoIcon/>, borderIcon: <InfoOutlinedIcon/>}
+    {id: 6, name: 'Информация', link: '/info', icon: <InfoIcon/>, borderIcon: <InfoOutlinedIcon/>},
+    {id: 6, name: 'Ввойти', link: '/login', icon: <LoginIcon/>, borderIcon: <LoginOutlinedIcon/>},
 ]

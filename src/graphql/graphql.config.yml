@@ -1,0 +1,8 @@
+schema: schema.graphql
+documents: '**/*.graphql'
+extensions:
+  endpoints:
+    "GrapgQL": {
+                 url: "http://localhost:5000/graphql",
+                 introspect: false,
+    }

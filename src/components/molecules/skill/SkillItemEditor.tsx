@@ -21,7 +21,7 @@ const SkillItemEditor: React.FC<ISkillItemProps> = ({ item }) => {
             >
                 <SkillItem item={item} />
             </EditPanel>
-            <SkillEditModal open={isOpenModal} onClose={handleCloseModal} />
+            <SkillEditModal skill={item} open={isOpenModal} onClose={handleCloseModal} />
         </>
     );
 };

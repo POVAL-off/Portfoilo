@@ -1,3 +1,4 @@
+# This file was generated. Do not edit manually.
 query GetSkills {
     getSkills {
         _id,
@@ -8,4 +9,164 @@ query GetSkills {
         status,
         image
     }
+}
+
+mutation EditSkill($skill: AddSkill!, $editSkillId: String!) {
+    editSkill(skill: $skill, id: $editSkillId) {
+        _id
+        name
+        shortName
+        description
+        progress
+        status
+        image
+    }
+}
+
+mutation RemoveSkill($removeSkillId: String!) {
+    removeSkill(id: $removeSkillId) {
+        _id
+        name
+        image
+    }
+}
+
+mutation Login($nickName: String!, $password: String!) {
+    login(nickName: $nickName, password: $password) {
+        _id
+    }
+}
+
+query Me {
+    me {
+        _id
+        nickName
+        role
+    }
+}
+
+mutation Logout {
+    logout
+}
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Mutation {
+    addPage(link: String!, name: String!, status: Status = ACTIVE): Page!
+    addProject(createDate: DateTime, description: String, descriptionShort: String, image: Upload, name: String, rate: Float, stack: [ID!], status: Status = ACTIVE): Project!
+    addRoleUser(id: String!, role: String!): User!
+    addSkill(description: String, image: Upload, name: String, progress: Int, shortName: String, status: Status = ACTIVE): Skill!
+    addSkillsToProject(id: String!, skillsId: [String!]!): Project!
+    editPage(Page: InputPage!, id: String!): Page!
+    editProject(id: String!, project: InputProject!): Project!
+    editSkill(id: String!, skill: AddSkill!): Skill!
+    login(nickName: String!, password: String!): User!
+    logout: Boolean!
+    registration(nickName: String!, password: String!): User!
+    removePage(id: String!): Page!
+    removeProject(id: String!): Project!
+    removeSkill(id: String!): Skill!
+    removeSkillsInProject(id: String!, skillsId: [String!]!): Project!
+}
+
+type Page {
+    _id: ID
+    link: String
+    name: String!
+    status: Status
+}
+
+type Project {
+    _id: ID!
+    createDate: DateTime
+    description: String
+    descriptionShort: String
+    image: String
+    name: String!
+    rate: Float
+    stack: [ID]
+    status: Status
+}
+
+type Query {
+    getPage(id: String!): Page!
+    getPages: [Page!]!
+    getProject(id: String!): Project!
+    getProjects: [Project!]!
+    getSkill(id: String!): Skill!
+    getSkills: [Skill!]!
+    me: User!
+}
+
+type Skill {
+    _id: ID
+    description: String
+    image: String
+    name: String!
+    progress: Int
+    shortName: String
+    status: Status
+}
+
+type User {
+    _id: ID
+    nickName: String!
+    password: String!
+    role: Role
+}
+
+"User role"
+enum Role {
+    ADMIN
+    BETATESTER
+    MODERATOR
+    USER
+}
+
+"Status entity"
+enum Status {
+    ACTIVE
+    DISABLE
+    HIDDEN
+    SHORT
+}
+
+"The javascript `Date` as string. Type represents date and time as the ISO Date string."
+scalar DateTime
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload
+
+input AddSkill {
+    description: String
+    image: Upload
+    name: String
+    progress: Int
+    shortName: String
+    status: Status = ACTIVE
+}
+
+input InputPage {
+    link: String!
+    name: String!
+    status: Status = ACTIVE
+}
+
+input InputProject {
+    createDate: DateTime
+    description: String
+    descriptionShort: String
+    image: Upload
+    name: String
+    rate: Float
+    stack: [ID!]
+    status: Status = ACTIVE
+}
+
+input RegisterUser {
+    nickName: String!
+    password: String!
 }

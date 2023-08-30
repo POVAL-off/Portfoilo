@@ -12,7 +12,7 @@ interface ISkillDialog {
 export const SkillDialog: React.FC<ISkillDialog> = ({open, onClose, skill}) =>
     <ContentDialog open={open} onClose={onClose} title={skill.name}>
         <img style={{width: 100, height: 100}} src={`http://localhost:5000/${skill.image}`} alt={skill.name}/>
-        <DialogContentText>
-            {skill.description}
+        <DialogContentText color="primary">
+            <div dangerouslySetInnerHTML={{ __html: skill.description || "" }} />
         </DialogContentText>
     </ContentDialog>;

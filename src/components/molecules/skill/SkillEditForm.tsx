@@ -1,42 +1,51 @@
-// @ts-ignore
-import React from "react";
+import React, {useRef} from "react";
 import {useFormik} from "formik";
-import {Box, Button, Grid, MenuItem, Slider, StandardTextFieldProps, Typography} from "@mui/material";
+import {Box, Button, Grid, IconButton, MenuItem, Slider, StandardTextFieldProps, Typography} from "@mui/material";
 import * as yup from "yup";
 import TextField from "../../atoms/TextField";
+import {IAddSkill, ISkill, Status} from "../../../generated/graphql";
+import {skillInputDTO} from "../../../generated/dto/skill.dto";
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import ForwardIcon from '@mui/icons-material/Forward';
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.snow.css';
 
 const validationSchema = yup.object({
     name: yup
         .string()
         .required('Name is required'),
-    shortName: yup
-        .string()
-        .required('Short name is required')
-        .max(5)
 });
 
-const initialValues = {
+const initialValues: IAddSkill = {
     name : '',
     shortName : '',
     description : '',
     progress : 0,
-    status : '',
-    image : '',
+    status : Status.Hidden,
+    image : null,
 }
 
-type ISkillValues = typeof initialValues;
+type ISkillValues = IAddSkill;
 
 interface ISkillEditFormProps {
-    initValues?: ISkillValues;
+    skill: ISkill;
     onChange?: (value: ISkillValues) => void;
+    onCancel?: () => void;
+    onSave: (value: ISkillValues) => void;
 }
 
-const SkillEditForm: React.FC<ISkillEditFormProps> = ({ initValues, onChange }) => {
+const SkillEditForm: React.FC<ISkillEditFormProps> = ({ skill, onSave, onCancel }) => {
     const formik = useFormik({
-        initialValues: initialValues || initValues,
+        initialValues: skillInputDTO(skill) || initialValues,
         validationSchema,
-        onSubmit: (values) => console.log(values)
+        onSubmit: (values) => onSave(values)
     })
+
+    const editorRef = useRef(null);
+
+    const handleInputImage = (event: React.ChangeEvent<HTMLInputElement>) => {
+        formik.setFieldValue("image", (event.currentTarget?.files?.length && event.currentTarget.files[0]) || null);
+    }
 
     return (
         <Box className="skill-edit-form">
@@ -49,11 +58,16 @@ const SkillEditForm: React.FC<ISkillEditFormProps> = ({ initValues, onChange }) 
                         <TextField name="shortName" formik={formik}/>
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField name="description" formik={formik}/>
+                        <ReactQuill
+                            value={formik.values.description || ''}
+                            onChange={(data) => formik.setFieldValue("description", data)}
+                        />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField name="status" formik={formik} select>
-                            <MenuItem value="">None</MenuItem>
+                            {Object.values(Status).map((value) => (
+                                <MenuItem key={value} value={value}>{value}</MenuItem>
+                            ))}
                         </TextField>
                     </Grid>
                     <Grid item xs={12}>
@@ -63,7 +77,7 @@ const SkillEditForm: React.FC<ISkillEditFormProps> = ({ initValues, onChange }) 
                                     getAriaLabel={() => 'Minimum distance shift'}
                                     id="progress"
                                     name="progress"
-                                    value={formik.values.progress}
+                                    value={formik.values.progress || 0}
                                     onChange={formik.handleChange}
                                     valueLabelDisplay="auto"
                                     disableSwap
@@ -74,17 +88,30 @@ const SkillEditForm: React.FC<ISkillEditFormProps> = ({ initValues, onChange }) 
                             </Grid>
                         </Grid>
                     </Grid>
-                    <Grid item xs={12}>
-                            <Button
-                            variant="contained"
+                    <Grid item xs={12} alignItems="center">
+                        {skill.image && (
+                            <>
+                                <img src={`http://localhost:5000/${skill.image}`} alt={skill.name}/>
+                                {formik.values.image && <ForwardIcon />}
+                            </>
+                        )}
+                        {formik.values.image && <img src={URL.createObjectURL(formik.values.image)} />}
+
+                        <IconButton
                             component="label"
+                            color="primary"
                         >
-                            Upload File
+                            <FileUploadIcon />
                             <input
                                 type="file"
                                 hidden
+                                onChange={handleInputImage}
                             />
-                        </Button>
+                        </IconButton>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Button variant="contained" type="submit">Сохранить</Button>
+                        <Button variant="contained" onClick={onCancel}>Отменить</Button>
                     </Grid>
                 </Grid>
             </form>
